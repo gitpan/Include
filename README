@@ -1,0 +1,25 @@
+This is the README file for Include
+
+Include is a perl5 package which allows the use of macros defined in 'C' header
+files
+
+You install the library by running these commands:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+
+An example script is given, run it as
+
+  perl example
+
+Please report any bugs and/or suggestions to <bodg@tiuk.ti.com>
+
+Copyright 1996 Graham Barr. All rights reserved.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+Share and Enjoy!
+
