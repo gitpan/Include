@@ -1,5 +1,5 @@
 # This -*- perl -*- script makes the Makefile
-# $Id: Makefile.PL,v 1.2 1996/01/02 16:51:31 gbarr Exp $
+# $Id: Makefile.PL,v 1.3 1996/01/04 12:56:50 gbarr Exp $
 
 use ExtUtils::MakeMaker;
 use ExtUtils::Manifest qw(maniread);
@@ -7,7 +7,9 @@ use lib qw(. ./lib);
 
 #--- Configuration section ---
 
-%install_pgm = ();
+%install_pgm =  (
+		 'bin/h2ph' => 1
+		);
 
 #--- End User Configuration - You should not have to change anything below this line
 
@@ -17,7 +19,7 @@ use Getopt::Std;
 $NAME     = 'Include';
 $RELTYPE  = "a";
 
-%chk_install =  ();
+%chk_install = ();
 $lib_only    = 0;
 
 #--- End Configuration
@@ -93,7 +95,7 @@ sub initialize {
  foreach (keys %$manifest) {
   $PL_FILES{$_} = $1 if(/(.*)\.PL\Z/ && !/^Makefile.PL$/);
 
-  if(m#\bbin/# && !m#demo#) {
+  if((m#\bbin/# && !m#demo#) || m#\.PL\Z#) {
    my $f = $_;
 
    $f =~ s#\.PL$##;
@@ -148,12 +150,6 @@ sub initialize {
 
 
 # -- Make the Makefile
-
-getopts("l") or
- die "Usage: $0 [-l]\n";
-
-$lib_only = 1 
-  if(defined $opt_l && $opt_l);
 
 my $hash = initialize();
 WriteMakefile( %$hash ) ;
